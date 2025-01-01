@@ -10,6 +10,9 @@ in a string (polynomial in GF(2)). If the polynomial is irreducible and primitiv
 period of the sequence reaches the maximum length of 2^n -1. Note that a sequence of all 0s will just lead to 0.
 The algorithm operates on a 624 elements, each with 32 bits. The 31 bits from positions [1, 31] are not used,
 thus, n = 624 * 32 - 31 = 19937. The period of the sequence is 2^19937 -1, a prime number (Mersenne prime number) - thus the name.
+Of course, the Mersenne Twister is more complicated than the
+LFSR as one works on the software stack, the other works on 
+hardware.
 */
 struct rand
 {
@@ -30,8 +33,10 @@ void generate_numbers(struct rand *r){
         r->states[i] = r->states[(i + 397) % 624] ^ (y >> 1);
         if (y %2 != 0){
             r->states[i] ^= 0x9908b0df;
+            
         }
     }
+
 }
 
 #endif
