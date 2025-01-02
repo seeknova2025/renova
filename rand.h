@@ -33,10 +33,26 @@ void generate_numbers(struct rand *r){
         r->states[i] = r->states[(i + 397) % 624] ^ (y >> 1);
         if (y %2 != 0){
             r->states[i] ^= 0x9908b0df;
-            
+
         }
     }
 
 }
+uint32_t extract_number(struct rand *r) {
+    if (r->index == 0) {
+        generate_numbers(r);
+    }
+
+    uint32_t y = r->states[r->index];
+    y ^= (y >> 11);
+    y ^= (y << 7) & 0x9d2c5680;
+    y ^= (y << 15) & 0xefc60000;
+    y ^= (y >> 18);
+
+    r->index = (r->index + 1) % 624; // Increment and wrap around
+    return y;
+}
+
+
 
 #endif
