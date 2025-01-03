@@ -61,11 +61,22 @@ uint64_t randint64(struct  rand *r){
     return ((uint64_t) high << 32) | low; 
 }
 
-/*generate a 32-bit floating point number in the range of [0,1] */
+/*generate a 32-bit floating point number in the range of [0,1]
+Probably a better one is to choose just 24 bits according to IEEE 754. 
+ */
 float randfloat32(struct rand *r){
     uint32_t n = randint32(r);
     return n/(float)UINT32_MAX;
 }
+
+/*Generate a 64-bit floating point number in the range of [0,1]
+Probably a better one is to choose just 53 bits according to IEEE 754 
+*/
+double randfloat64(struct rand *r){
+    uint64_t n = randint64(r);
+    return n/(double)UINT64_MAX;
+}
+
 
 
 #endif
