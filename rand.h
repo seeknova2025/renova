@@ -69,6 +69,9 @@ float randfloat32(struct rand *r){
     return n/(float)UINT32_MAX;
 }
 
+float randfloat32(struct rand *r, float from, float to){
+    return randfloat32(r) * (to - from) + from; 
+}
 /*Generate a 64-bit floating point number in the range of [0,1]
 Probably a better one is to choose just 53 bits according to IEEE 754 
 */
@@ -77,6 +80,14 @@ double randfloat64(struct rand *r){
     return n/(double)UINT64_MAX;
 }
 
+double randfloat64(struct rand *r, double from, double to){
+    return randfloat64(r) * (to - from) + from;
+}
+
+//create a normal distribution with n elements
+void generate_normal(float *data, uint32_t n, float mean, float std, rand *r){
+
+}
 
 
 #endif
