@@ -85,7 +85,7 @@ double randfloat64(struct rand *r, double from, double to){
 }
 
 //create a normal distribution with n elements
-void generate_normal(float *data, uint32_t n, float mean, float std, rand *r){
+void generate_normal(float *data, uint32_t n, float mean, float std, struct rand *r){
 
 }
 
