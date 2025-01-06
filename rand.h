@@ -85,7 +85,14 @@ double randfloat64(struct rand *r, double from, double to){
 }
 
 //create a normal distribution with n elements
+/*Theory about Reyleigh distribution: it's a continuous 
+probability function used in various fields such as signal processing, physics,
+and reliability engineering. It describes the magnitude of a vector whose components 
+are independently and identically distributed Gaussian random variables. 
+
+*/
 void generate_normal(float *data, uint32_t n, float mean, float std, struct rand *r){
+    
 
 }
 
