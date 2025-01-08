@@ -1,6 +1,7 @@
 #ifndef RAND_H
 #define RAND_H
 #include<stdlib.h>
+#include<math.h>
 /*
 Implement Mersenne Twister algorithm for generating random numbers
 The basis of Mersenne Twister algorithm stems from the Linear Feedback Shift Register. 
@@ -95,8 +96,18 @@ Given two independent random variables
 
 */
 void generate_normal(float *data, uint32_t n, float mean, float std, struct rand *r){
+    #define EPSILON 1e-12f
+    for(size_t i = 0; i < n; i +=2){
+        float u1 = randfloat32(r);
+        float u2 = randfloat32(r);
+        float r = sqrtf(-2 * logf(u1 + EPSILON));
+        float theta = 2.0f * M_PI * u2;
+        data[i] = r * cosf(theta) * std + mean;
+        if (i +1 < n){
+            data[i+1] = r * sinf(theta) * std + mean; 
+        }
 
-
+    }
 }
 
 
