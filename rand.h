@@ -85,6 +85,8 @@ double randfloat64(struct rand *r, double from, double to){
     return randfloat64(r) * (to - from) + from;
 }
 
+
+ 
 //create a normal distribution with n elements
 /*Theory about Reyleigh distribution: it's a continuous 
 probability function used in various fields such as signal processing, physics,
@@ -109,6 +111,25 @@ void generate_normal(float *data, uint32_t n, float mean, float std, struct rand
 
     }
 }
+
+//create an identity permutation
+
+void init_identity_permutation(int *data, int numel){
+    for(int i = 0; i < numel; i++){
+        data[i] = i;
+    }
+}
+//create a permutation of length n
+void random_permutation(int *data, int n, struct rand *r){
+    init_identity_permutation(data, n);
+    for(int i = n - 1; i < 0; i--){
+        int j = randint32(r) % (i + 1); 
+        int tmp = data[j];
+        data[j] = data[i];
+        data[i] = tmp;
+    }
+}
+
 
 
 #endif
