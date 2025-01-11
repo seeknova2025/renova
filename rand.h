@@ -2,6 +2,7 @@
 #define RAND_H
 #include<stdlib.h>
 #include<math.h>
+#include <stdio.h>
 /*
 Implement Mersenne Twister algorithm for generating random numbers
 The basis of Mersenne Twister algorithm stems from the Linear Feedback Shift Register. 
@@ -70,7 +71,7 @@ float randfloat32(struct rand *r){
     return n/(float)UINT32_MAX;
 }
 
-float randfloat32(struct rand *r, float from, float to){
+float randfloat32_range(struct rand *r, float from, float to){
     return randfloat32(r) * (to - from) + from; 
 }
 /*Generate a 64-bit floating point number in the range of [0,1]
@@ -81,7 +82,7 @@ double randfloat64(struct rand *r){
     return n/(double)UINT64_MAX;
 }
 
-double randfloat64(struct rand *r, double from, double to){
+double randfloat64_range(struct rand *r, double from, double to){
     return randfloat64(r) * (to - from) + from;
 }
 
@@ -119,15 +120,17 @@ void init_identity_permutation(int *data, int numel){
         data[i] = i;
     }
 }
+
 //create a permutation of length n
 void random_permutation(int *data, int n, struct rand *r){
     init_identity_permutation(data, n);
-    for(int i = n - 1; i < 0; i--){
+    for(int i = n - 1; i > 0; i--){
         int j = randint32(r) % (i + 1); 
         int tmp = data[j];
         data[j] = data[i];
         data[i] = tmp;
     }
+
 }
 
 
