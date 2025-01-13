@@ -13,6 +13,7 @@ int main(){
         uint64_t n  = randint64(&r);
         printf("64 bits: %llu\n", n);
     }
+
     //create a permutation of size 10
     //void random_permutation(int *data, int n, struct rand *r){
     
@@ -26,7 +27,14 @@ int main(){
         }
         printf("\n");
     }
+    //create a normal distribution
+    //void generate_normal(float *data, uint32_t n, float mean, float std, struct rand *r);
+    float float_data[32];
+    generate_normal(float_data, 32, 0, 1, &r);
+    for(int i = 0; i < 32; i++){
+        printf("%f ", float_data[i]);
+    }
+    printf("\n");
 
-    return 0;
-    
+    return 0;    
 }
