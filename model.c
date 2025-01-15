@@ -3,6 +3,12 @@
 
 
 // Function to load the GPT-2 model in binary format
+
+typedef struct {
+    unsigned char *data;
+    long size;
+} GPT;
+
 void load_gpt2_model(const char *file_path) {
     FILE *file = fopen(file_path, "rb");
     if (file == NULL) {
@@ -45,5 +51,6 @@ void load_gpt2_model(const char *file_path) {
 int main() {
     const char *model_path = "gpt2_124M.bin";
     load_gpt2_model(model_path);
+
     return 0;
 }
