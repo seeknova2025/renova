@@ -7,7 +7,10 @@
 typedef struct {
     unsigned char *data;
     long size;
-} GPT;
+    int num_layers;
+    int num_heads;
+    int hidden_size;
+} GPT2Model;
 
 void load_gpt2_model(const char *file_path) {
     FILE *file = fopen(file_path, "rb");
