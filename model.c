@@ -12,7 +12,9 @@ typedef struct {
     int hidden_size;
 } GPT2Model;
 
-void load_gpt2_model(const char *file_path) {
+
+
+void load_gpt2_model(const char *file_path, struct GPT2Model *model) {
     FILE *file = fopen(file_path, "rb");
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open file %s\n", file_path);
@@ -53,7 +55,14 @@ void load_gpt2_model(const char *file_path) {
 
 int main() {
     const char *model_path = "gpt2_124M.bin";
-    load_gpt2_model(model_path);
+    GPT2Model model;
+    load_gpt2_model(model_path, &model);
+
+    // Use the model data (this is just a placeholder, actual usage will depend on your application)
+    printf("GPT-2 model loaded successfully, size: %ld bytes\n", model.size);
+
+    // Free the allocated memory
+    free(model.data);
 
     return 0;
 }
