@@ -2,6 +2,40 @@
 #include <stdlib.h>
 
 
+typedef struct {
+    int max_seq_length;
+    int vocab_size;
+    int rounded_vocab_size;
+    int num_layers;
+    int num_heads;
+    int channels;
+
+} GPTConfig;
+
+
+// the parameters of the model
+#define NUM_PARAMETER_TENSORS 16
+typedef struct {
+    float* wte; // (V, C)
+    float* wpe; // (maxT, C)
+    float* ln1w; // (L, C)
+    float* ln1b; // (L, C)
+    float* qkvw; // (L, 3*C, C)
+    float* qkvb; // (L, 3*C)
+    float* attprojw; // (L, C, C)
+    float* attprojb; // (L, C)
+    float* ln2w; // (L, C)
+    float* ln2b; // (L, C)
+    float* fcw; // (L, 4*C, C)
+    float* fcb; // (L, 4*C)
+    float* fcprojw; // (L, C, 4*C)
+    float* fcprojb; // (L, C)
+    float* lnfw; // (C)
+    float* lnfb; // (C)
+} ParameterTensors;
+
+
+
 // Function to load the GPT-2 model in binary format
 
 struct {
@@ -64,7 +98,7 @@ int main() {
 
     // Free the allocated memory
     free(model.data);
-    
+
 
     return 0;
 }
