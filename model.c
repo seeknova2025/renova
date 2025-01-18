@@ -4,13 +4,14 @@
 
 // Function to load the GPT-2 model in binary format
 
-typedef struct {
+struct {
     unsigned char *data;
     long size;
     int num_layers;
     int num_heads;
     int hidden_size;
 } GPT2Model;
+
 
 
 
@@ -63,6 +64,7 @@ int main() {
 
     // Free the allocated memory
     free(model.data);
+    
 
     return 0;
 }
